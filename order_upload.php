@@ -61,8 +61,10 @@ uploadOrders($orders);
 
 function getOrdersForUpload($orders)
 {
+    // $filteredArray = array_filter($fullArray, fn ($value) => $value === 2);
     // filter out orders that have already been uploaded, and only return orders with the status 'ready_to_ship' or 'cancelled'
-    return $orders;
+    return array_filter($orders, fn($order) => $order->uploaded_at === null && ($order->status === 'ready_to_ship' || $order->status === 'cancelled'));
+
 }
 
 function uploadOrders($orders)
@@ -71,7 +73,7 @@ function uploadOrders($orders)
     $ftp_server = "ftp.example.com";
     $ftp_username = "username";
     $ftp_password = "password";
-    $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+    $ftp_conn = ftp_connect(hostname: $ftp_server) or die("Could not connect to $ftp_server");
     $login = ftp_login($ftp_conn, $ftp_username, $ftp_password);
     if (!$login) {
         die("Could not log in to FTP server");
@@ -91,11 +93,12 @@ function uploadOrders($orders)
             $order['amount'],
             $order['shipping_price'],
             $order['items'],
-            $order['billing_address'],
+            $order['shipping_address'], // changed to shipping_address 
             $order['billing_address'],
             $order['status'],
-            $order['uploaded_at'] ?? '',
             $order['created_at'],
+            $order['uploaded_at'] ?? date("Y-m-d H:i:s"), // swapped them around and set the uploaded date to the current date, alternatively :  ($now = new DateTimeImmutable())->format('Y-m-d H:i:s');
+
         ]);
     }
     fclose($fp);
