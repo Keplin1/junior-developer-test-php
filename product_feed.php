@@ -4,9 +4,9 @@
 
 // imagine this data came from a database or an API
 $product_header = [
-    ['id' => 1,'sku' => 'SKU001', 'status' => 'active'],
+    ['id' => 1, 'sku' => 'SKU001', 'status' => 'active'],
     ['id' => 2, 'sku' => 'SKU002', 'status' => 'active'],
-    ['id' => 3,  'sku' => 'SKU003', 'status' => 'disabled'],
+    ['id' => 3, 'sku' => 'SKU003', 'status' => 'disabled'],
     ['id' => 4, 'sku' => 'SKU004', 'status' => 'active'],
     ['id' => 5, 'sku' => 'SKU005', 'status' => 'active'],
 ];
@@ -26,23 +26,25 @@ $all_products = [];
 
 // Loop through product headers and details to create a combined array
 foreach ($product_header as $header) {
+    if ($header['status'] !== 'active') {
+        continue; // Skip inactive products // moved this condition from below 
+    }
     foreach ($product_detail as $detail) {
-        if ($header['id'] === $detail['id']) {                    
+        if ($header['id'] === $detail['id']) {
             if ($detail['stock'] <= 0) {
                 continue; // Skip products that are out of stock
             }
-            if (strtotime($detail['updated_at']) < strtotime($current_date)) {
-                continue; // Skip products already updated today
+            if (strtotime($detail['updated_at']) === strtotime($current_date)) {
+                continue; // Skip products already updated today // changed to strict equality 
             }
             $all_products[] = array_merge($header, $detail);
+
         }
     }
-    if ($header['status'] !== 'active') {
-        continue; // Skip inactive products
-    }
+
 }
 
 // generate a json feed and save it to disk
 $json_feed = json_encode($all_products, JSON_PRETTY_PRINT);
-file_put_contents('product_feed.json', $json_feed); 
+file_put_contents('product_feed.json', $json_feed);
 ?>
