@@ -61,9 +61,19 @@ uploadOrders($orders);
 
 function getOrdersForUpload($orders)
 {
-    // $filteredArray = array_filter($fullArray, fn ($value) => $value === 2);
+
     // filter out orders that have already been uploaded, and only return orders with the status 'ready_to_ship' or 'cancelled'
-    return array_filter($orders, fn($order) => $order->uploaded_at === null && ($order->status === 'ready_to_ship' || $order->status === 'cancelled'));
+    // $filteredArray = array_filter($fullArray, fn ($value) => $value === 2) // example of using filter method
+    // return array_filter($orders, fn($order) => $order['uploaded_at'] === null && ($order['status'] === 'ready_to_ship' || $order['status'] === 'cancelled'));
+    $filtered_array = [];
+
+    foreach ($orders as $order) {
+        if ($order['uploaded_at'] === null && ($order['status'] === 'ready_to_ship' || $order['status'] === 'cancelled')) {
+            $filtered_array[] = $order;
+        }
+
+    }
+    return $filtered_array;
 
 }
 
