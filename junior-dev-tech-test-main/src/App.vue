@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="d-flex justify-content-center align-items-center flex-column">
-      <img alt="Regatta Group" src="./assets/Regatta_Group-Logo.svg" width="200" height="80" class="py-3"/>
+      <img alt="Regatta Group" src="./assets/Regatta_Group-Logo.svg" width="200" height="80" class="py-3" />
     </div>
-    <Product/>
+    <Product />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import "./assets/css/poppins.css"
+@import "./assets/css/poppins.css";
 
 body {
   font-family: 'Poppins', sans-serif;

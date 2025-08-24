@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import product from '../assets/Product.json'
+import product from './data/product.json'
 
 export default {
   name: 'ProductPage',
@@ -21,5 +21,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// Styling to be added here if needed. SASS is allowed if preferred
-</style>
+// Styling to be added here if needed. SASS is allowed if preferred</style>

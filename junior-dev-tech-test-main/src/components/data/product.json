@@ -1,5 +1,13 @@
 {
-  "product_size_labels": ["8", "10", "12", "14", "16", "18", "20"],
+  "product_size_labels": [
+    "8",
+    "10",
+    "12",
+    "14",
+    "16",
+    "18",
+    "20"
+  ],
   "product_title": "Women's Birchdale II Waterproof Jacket",
   "product_colour": "Wisteria Lilac Hint",
   "selling_price": 65,
@@ -57,8 +65,8 @@
     {
       "image": "https://content.regatta.com/RWW455_74T/150/RWW455_74T_01_bynder_defined_type_model_011742847213.jpg",
       "alt_text": "Navy Icy Morn",
-      "url": "womens-birchdale-ii-waterproof-jacket-navy-icy-morn/
-      "width 150,
+      "url": "womens-birchdale-ii-waterproof-jacket-navy-icy-morn/",
+      "width": 150,
       "height": 150
     }
   ]
