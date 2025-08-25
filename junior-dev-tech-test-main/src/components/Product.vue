@@ -1,19 +1,70 @@
 <template>
-  <div id="product">
+  <div id="product" class="container-fluid row">
     <!-- Add your code here -->
 
-    <div id="parent">
-      <div id="left-container">
-        <img v-for="(image_data, index) in product.media_gallery" :key="index" class="image-container "
-          :src="image_data.image" :alt="image_data.alt" />
+
+    <div class="row col-12 col-md-7 row-cols-2">
+
+
+      <img v-for="(image_data, index) in product.media_gallery" :key="index" class="mb-4 img-fluid"
+        :src="image_data.image" :alt="image_data.alt" />
+
+
+    </div>
+    <div class="col-12 col-md-5">
+      <div class="border-bottom">
+        <p class="text-left"> {{ product.product_offer_label }} </p>
+
+        <h4 class="text-left">{{ product.product_title }}</h4>
       </div>
-      <div id="right-container">
-        <p class="text-center">{{ product.product_title }}</p>
+      <div class="row border-bottom">
+        <div class="col-6 col-md-4">
+          <span>Original</span>
+          <p>£{{ product.rrp.toFixed(2) }}</p>
+        </div>
+        <div class="col-6 col-md-4">
+
+          <span>Now</span>
+          <p>£{{ product.selling_price.toFixed(2) }}</p>
+
+        </div>
+        <div class="col-6 col-md-4">50% discount</div>
       </div>
+
+      <div class="row border-bottom">
+        <img v-for="(image_data, index) in product.alternative_colours" :key="index" style="max-width:20%"
+          :src="image_data.image" :alt="image_data.alt_text" />
+
+        <!-- <img v-for="(image_data, index) in product.alternative_colours" :key="index" class="h-30 w-auto"
+          :src="image_data.image" :alt="image_data.alt_text" /> -->
+      </div>
+
+      <div class="col-12 border-bottom">
+        <p>Select Size</p>
+
+        <button v-for="(size, index) in product.product_size_labels" :key="index" class="btn btn-outline-dark"> {{ size
+        }}
+        </button>
+
+      </div>
+      <div class="row">
+
+        <button class="btn btn-dark btn-lg rounded-pill">Add To Bag</button>
+      </div>
+      <div>
+        <p>Description</p>
+
+        <p>{{ product.product_description }}</p>
+        <div v-html="product.product_bulletpoints"></div>
+        <p>Product Code: {{ product.product_sku }}</p>
+
+      </div>
+
     </div>
 
 
   </div>
+
 </template>
 
 <script>
@@ -31,36 +82,5 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-#parent {
-  display: flex;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-}
-
-#left-container {
-  display: flex;
-  flex-basis: 60%; // Fixed 60% width
-  flex-flow: row wrap;
-
-}
-
-#right-container {
-  display: flex;
-  flex-basis: 40%;
-  flex-direction: column;
-}
-
-.image-container {
-  // flex-basis: 50%; // Each image takes 50% of container width minus padding, making them appear side-by-side
-  padding: 5px; // between each image
-
-}
-
-img {
-  max-width: 50%;
-  max-height: 50%; // Fill the container width
-
-}
-</style>
+<style scoped lang="scss"></style>
 <!-- // Styling to be added here if needed. SASS is allowed if preferred</style> -->
