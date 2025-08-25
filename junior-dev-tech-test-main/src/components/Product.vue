@@ -3,14 +3,25 @@
     <!-- Add your code here -->
 
 
-    <div class="row col-12 col-md-8 row-cols-2">
+    <!-- <div class="row col-12 col-md-8">
 
+      <div v-for="(image_data, index) in product.media_gallery" :key="index" class="col-6">
+        <img class="img-fluid" :src="image_data.image" :alt="image_data.alt" />
+      </div>
 
-      <img v-for="(image_data, index) in product.media_gallery" :key="index" class="mb-4 img-fluid"
-        :src="image_data.image" :alt="image_data.alt" />
+    </div> -->
 
+    <div class="col-12 col-md-8">
+      <div class="row g-2">
+        <div v-for="(image_data, index) in product.media_gallery" :key="index" class="col-6">
 
+          <img :src="image_data.image" :alt="image_data.alt" class="w-100 h-100" />
+
+        </div>
+      </div>
     </div>
+
+
     <div class="col-12 col-md-4">
 
       <div class="border-bottom">
@@ -49,7 +60,8 @@
 
         <button @click="selectedSize = size" v-for="(size, index) in product.product_size_labels" :key="index"
           class="btn btn-outline-dark mx-2 "
-          :class="selectedSize === size ? 'btn-dark text-light' : 'btn-outline-dark'"> {{
+          :class="selectedSize === size ? 'btn-dark text-light' : 'btn-outline-dark'">
+          {{
             size
           }}
         </button>
@@ -119,7 +131,6 @@ export default {
       if (!this.selectedSize) {
         alert('Please select your size')
       }
-      console.log(this.selectedSize)
       if (this.selectedSize !== null) {
         this.addedSize = this.selectedSize;
         this.toast.show();
@@ -143,7 +154,6 @@ export default {
 .button-text {
   font-size: 18px;
   font-weight: 500;
-
 
 
 }
