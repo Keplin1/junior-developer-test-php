@@ -1,62 +1,49 @@
 <template>
   <div id="product" class="container-fluid row">
-    <!-- Add your code here -->
 
-
-    <!-- <div class="row col-12 col-md-8">
-
-      <div v-for="(image_data, index) in product.media_gallery" :key="index" class="col-6">
-        <img class="img-fluid" :src="image_data.image" :alt="image_data.alt" />
-      </div>
-
-    </div> -->
-
+    <!-- Left Side -->
     <div class="col-12 col-md-8">
       <div class="row g-2">
         <div v-for="(image_data, index) in product.media_gallery" :key="index" class="col-6">
-
           <img :src="image_data.image" :alt="image_data.alt" class="w-100 h-100" />
-
         </div>
       </div>
     </div>
 
-
+    <!-- Right Side -->
     <div class="col-12 col-md-4">
 
+      <!-- Discount & Title -->
       <div class="border-bottom">
-        <p class="text-left header px-1 text-body-secondary"> {{ product.product_offer_label }} </p>
-
-        <h4 class="text-left">{{ product.product_title }}</h4>
+        <p class="text-left header px-1 poppins-light"> {{ product.product_offer_label }} </p>
+        <h4 class="text-left ">{{ product.product_title }}</h4>
       </div>
-      <div class="row border-bottom pt-2">
 
+      <!-- Cost -->
+      <div class="row border-bottom pt-2">
         <div class="col-2 col-md-3">
           <span>Original</span>
           <p><s>£{{ product.rrp.toFixed(2) }}</s></p>
-
-
         </div>
         <div class="col-2 col-md-3">
-
           <span>Now</span>
           <p class="text-danger">£{{ product.selling_price.toFixed(2) }}</p>
         </div>
         <div class="col-4 col-md-6 ms-auto text-danger ">| Save {{ calcDiscount(product.rrp, product.selling_price) }}%
-          |
-        </div>
+          |</div>
       </div>
-
+      <!-- alternative-colours -->
       <div class="row border-bottom py-2">
-        <img v-for="(image_data, index) in product.alternative_colours" :key="index" style="max-width:20%"
-          :src="image_data.image" :alt="image_data.alt_text" @error="$event.target.style.display = 'none'" />
 
-        <!-- <img v-for="(image_data, index) in product.alternative_colours" :key="index" class="h-50 w-auto"
-          :src="image_data.image" :alt="image_data.alt_text" /> -->
+        <img type="button" v-for="(image_data, index) in product.alternative_colours" :key="index" style="max-width:20%"
+          :src="image_data.image" :alt="image_data.alt_text" @error="$event.target.style.display = 'none'"
+          class="img-thumbnail mx-1" @click="selectedColour = image_data.alt_text"
+          :class="{ 'border border-2 border-dark': selectedColour === image_data.alt_text }" />
+
       </div>
-
+      <!-- choice of sizes -->
       <div class="col-12 border-bottom py-3">
-        <p class="mb-1">Select Size</p>
+        <p class="mb-1 poppins-light">Select Size</p>
 
         <button @click="selectedSize = size" v-for="(size, index) in product.product_size_labels" :key="index"
           class="btn btn-outline-dark mx-2 "
@@ -67,6 +54,7 @@
         </button>
 
       </div>
+      <!-- Add-to-bag Button -->
       <div class="row pt-2">
 
         <button @click="addToBag" class="btn btn-dark btn-lg rounded-pill button-text">Add To Bag</button>
@@ -77,7 +65,7 @@
         <p>{{ product.product_description }}</p>
         <div v-html="product.product_bulletpoints"></div>
 
-        <p class="weight-300"> <span class="weight-500"> Product Code: </span>
+        <p class="poppins-light"> <span class="poppins-medium"> Product Code: </span>
           {{ product.product_sku }}</p>
 
       </div>
@@ -109,6 +97,7 @@ export default {
       selectedSize: null,
       addedSize: null,
       toast: null,
+      selectedColour: null
       // Add any other data properties you need
     }
   },
@@ -135,6 +124,7 @@ export default {
         this.addedSize = this.selectedSize;
         this.toast.show();
         this.selectedSize = null;
+        this.selectedColour = null;
 
       }
     },
@@ -148,14 +138,11 @@ export default {
 <style scoped lang="scss">
 .header {
   border-left: 4px solid #B32A2C;
-
 }
 
 .button-text {
   font-size: 18px;
   font-weight: 500;
-
-
 }
 </style>
 <!-- // Styling to be added here if needed. SASS is allowed if preferred</style> -->
