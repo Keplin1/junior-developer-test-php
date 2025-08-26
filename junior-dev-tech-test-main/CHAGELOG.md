@@ -10,8 +10,11 @@
 9. Added an 'Add To Bag' button. When clicked it triggers the `addToBag` function. In turn, the function checks if the size was selected. If the size is not null, it triggers a toast-pop up. The toast pop-up appers with a message for the user, which reads as "You have selected size: {{ addedSize }}".
 10. Added a description, with product bullet points and the product code from the `product.json` file Used a few font styles from the `poppings.css` file.
 
+11. Hosted the page on netlify: https://regatta-tech-test.netlify.app/
+
 # To be improved/ added:
 - Carousel for the images
 - Depending on desired behaviour, make the colour selector change to the URL on click
 - Size select button layout on small screens
 - Discount may not need to be displayed 
+- Testing
